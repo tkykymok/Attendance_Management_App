@@ -1,0 +1,20 @@
+{% extends "app/base.html" %}
+{% block content%}
+<div class="container-fluid">
+  <div class="card mb-3">
+    <div class="content-section">
+      <form method="POST">{% csrf_token %}
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4 pl-4">Delete Record</legend>
+          <h2><span class="pl-4">Are you sure you want to delete the post "{{ object.date_worked.masterdate }}"</span></h2>
+        </fieldset>
+        <div class="form-group pl-4">
+          <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+          <a class="btn btn-outline-secondary" href="{% url 'record' %}"type="submit">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'app/base.html' %}
+
+
+{% block content %}
+<script type="text/javascript">
+    function p_reload(){
+        var pwin=window.opener;
+        pwin.location.reload();
+        pwin.focus();
+        window.close();
+        }
+</script>
+
+
+  <form action="" method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="content-fruid">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fa fa-server"></i> <h3>編集画面</h3></div>
+                        <div class="card-body"> {{form.as_p}} </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-primary" onClick="p_reload()">保存</button>
+            </div>
+        </div>         
+    </div>
+      {% csrf_token %}
+  </form>
+
+{% endblock %}

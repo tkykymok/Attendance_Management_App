@@ -1,0 +1,62 @@
+{% extends 'app/base.html' %}
+
+{% load utils %}
+
+{% block content %}
+<div class="container-fluid">
+    <form method="get">
+        社員名 : <select name="staff" style="width:200px; height:40px">
+        {% for staff in staff_list %}
+            <option value=''  disabled selected style='display:none;' >選択してください</option>
+            <option value='{{staff.id}}'>{{staff.last_name}}　{{staff.first_name}}</option>
+        {% endfor %}
+        </select>
+        開始日 : <input type="date" style="width:200px; height:40px" name="date_s">
+        　終了日 : <input type="date" style="width:200px; height:40px" name="date_e">
+        <input class="btn-sm btn-primary ml-3" type="submit">
+    </form>
+
+    <div class="card mb-3">
+            <div class="card-header pl-4">
+                <h3><b>全社員一覧</b></h3></div>
+            <div class="card-body"> 
+                <!-- テーブル表の定義 -->
+                <div class="table-responsive">
+                    <p>対象期間：{{date_s | default_if_none:""}} 〜 {{date_e | default_if_none:""}}</p>
+                    <table  width="100%" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">社員名</th>
+                                <th class="text-center">日付</th>
+                                <th class="text-center">出勤時刻</th>
+                                <th class="text-center">退勤時刻</th>
+                                <th class="text-center">残業開始</th>
+                                <th class="text-center">残業終了</th>
+                                <th class="text-center">残業時間</th>
+                                <th class="text-center">備考</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for record in records %}
+                            <tr class="odd gradeX text-center">
+                                <td class="text-center" width="100">{{ record.staff.last_name | default_if_none:""}}　{{ record.staff.first_name | default_if_none:""}}</td>
+                                <td class="text-center" width="100">{{ record.date_worked.masterdate | date:"Y年m月d日(D)" }}</td>  
+                                <td class="text-center" width="100">{{ record.check_in | default_if_none:""}}</td>
+                                <td class="text-center" width="100">{{ record.check_out | default_if_none:""}}</td>
+                                <td class="text-center" width="100">{{ record.overtime_s | default_if_none:""}}</td>
+                                <td class="text-center" width="100">{{ record.overtime_e | default_if_none:""}}</td>
+                                <td class="text-center" width="100">{{ record.overtime_s | subtraction_h:record.overtime_e | default_if_none:""}}{{ record.overtime_s | subtraction_m:record.overtime_e | default_if_none:""}}</td>
+                                <td class="text-center" width="100">{{ record.remark | default_if_none:""}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                <!-- ここまでが表のデータ部分の表示-->
+                    </table>
+                <!-- ここまでがテーブル表の定義 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
