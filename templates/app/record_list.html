@@ -10,6 +10,9 @@
     <input class="btn-sm btn-primary ml-3" type="submit" value="検索">
 </form>
 
+    <div class="card-body">残業時間合計：<span class="text1 mr-2">　　　</span>分</div> 
+
+
     <div class="card mb-3">
             <div class="card-header pl-4">
                 <h3><b>一覧</b></h3>   
@@ -28,27 +31,20 @@
                                 <th class="text-center">残業終了</th>
                                 <th class="text-center">残業時間</th>
                                 <th class="text-center">備考</th>
-                                <!-- <th class="text-center">更新</th> -->
 
                             </tr>
                         </thead>
-  
                         <tbody>
                             {% for record in record_list %}
                             <tr class="odd gradeX text-center">
                                 <!--<td class="text-center" width="100"><a target="_blank" href="{% url 'record_update' record.pk%}">{{ record.date_worked.masterdate }}</a></td>-->
-                                <td class="text-center" width="100"><a href="#" onClick="window.open('{% url 'record_update' record.pk%}', 'update', 'width=500,height=800');" >{{ record.date_worked.masterdate | date:"Y年m月d日(D)" }}</a></td>
+                                <td class="text-center" width="100"><a href="" onClick="window.open('{% url 'record_update' record.pk%}', 'update', 'width=500,height=800');" >{{ record.date_worked.masterdate | date:"Y年m月d日(D)" }}</a></td>
                                 <td class="text-center" width="100">{{ record.check_in | date:"H:i" | default_if_none:""}}</td>
                                 <td class="text-center" width="100">{{ record.check_out | date:"H:i" | default_if_none:""}}</td>
                                 <td class="text-center" width="100">{{ record.overtime_s | date:"H:i" | default_if_none:""}}</td>
                                 <td class="text-center" width="100">{{ record.overtime_e | date:"H:i" | default_if_none:"" }}</td>
                                 <td class="text-center" width="100">{{ record.overtime_s | subtraction_h:record.overtime_e | default_if_none:""}}{{ record.overtime_s | subtraction_m:record.overtime_e | default_if_none:""}}</td>
                                 <td class="text-center" width="100">{{ record.remark | default_if_none:"" }}</td>
-                                <!--
-                                <td class="text-center" width="100">
-                                    <a class="btn btn-danger "href="{% url 'record_delete' record.pk %}">Delete</a>
-                                </td>
-                                -->
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -59,7 +55,6 @@
             </div>
         </div>
     {% if messages %}
-
     <div class="row">
         <div class="messages mt-3 ml-3">
             {% for message in messages %}
@@ -67,8 +62,8 @@
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 {{ message }}
             </div>
-        {% endfor %}
-    </div>
+             {% endfor %}
+        </div>
     {% endif %}
     </div>
 </div>

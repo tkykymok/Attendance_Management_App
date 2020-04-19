@@ -2,16 +2,6 @@
 
 
 {% block content %}
-<script type="text/javascript">
-    function p_reload(){
-        var pwin=window.opener;
-        pwin.location.reload();
-        pwin.focus();
-        window.close();
-        }
-</script>
-
-
   <form action="" method="post">
     <div class="container">
         <div class="row">
@@ -34,4 +24,12 @@
       {% csrf_token %}
   </form>
 
+<script type="text/javascript">
+    function p_reload(){
+        var pwin = window.opener;
+        pwin.focus();
+        pwin.location.reload();
+        window.close();
+        }
+</script>
 {% endblock %}

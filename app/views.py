@@ -53,8 +53,7 @@ def index(request):
             if record_check.exists(): #出勤未処理
                 t_record.check_in = datetime.now().time()
                 t_record.save()
-                messages.success(request, '出勤　{0:%Y-%m-%d %H:%M:%S}'.format(datetime.now()))
-                return redirect('/')
+                # messages.success(request, '出勤　{0:%Y-%m-%d %H:%M:%S}'.format(datetime.now()))
             else: #出勤済の場合
                 pass
                  
@@ -65,8 +64,7 @@ def index(request):
             if record_check.exists(): #退勤未処理
                 t_record.check_out = datetime.now().time()
                 t_record.save()
-                messages.success(request, '退勤　{0:%Y-%m-%d %H:%M:%S}'.format(datetime.now()))
-                return redirect('/')
+                # messages.success(request, '退勤　{0:%Y-%m-%d %H:%M:%S}'.format(datetime.now()))
             else: #退勤済の場合
                 pass
             
